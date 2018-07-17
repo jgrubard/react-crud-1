@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
+import { getUsersFromServer } from '../store';
+import { connect } from 'react-redux';
 
 class App extends Component {
+  componentDidMount() {
+    const { loadUsers } = this.props;
+    loadUsers();
+  }
+
   render() {
     return (
       <div>
@@ -10,4 +17,17 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapState = ({ users }) => {
+  console.log(users);
+  return {
+    users
+  }
+}
+
+const mapDispatch = (dispatch) => {
+  return {
+    loadUsers: () => dispatch(getUsersFromServer())
+  }
+}
+
+export default connect(mapState, mapDispatch)(App);
