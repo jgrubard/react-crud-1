@@ -13,6 +13,8 @@ const seed = () => {
 }
 
 module.exports = {
+  conn,
+  Sequelize,
   sync,
   seed,
   models: {
